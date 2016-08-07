@@ -38,7 +38,7 @@
                //adds a todo to the list, and clears the description field for user convenience
                vm.add = function() {
                   if (vm.description()) {
-                     vm.list.push(new todo.Todo({description: vm.description()}));
+                     vm.list.push(new options.title({title: vm.title()}));
                      vm.description("");
                   }
                };
@@ -56,7 +56,9 @@
          todo.view = function() {
             return [
                m("input", {onchange: m.withAttr("value", todo.vm.description), value: todo.vm.description()}),
+               m("p", "boo"),
                m("button", {onclick: todo.vm.add}, "Add"),
+               m("h3", "todo list:"),
                m("table", [
                   todo.vm.list.map(function(task, index) {
                      return m("tr", [
@@ -71,7 +73,7 @@
          };
 
          //initialize the application
-         m.mount(document.body, {controller: todo.controller, view: todo.view});
+         m.mount(document.body, {controller: options.controller, view: options.view});
       </script>
    </body>
 </html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Mithril-Options</title>
+      <script src="mithril.js"></script>
+   </head>
+   <body>
+      <script>
+         var options = {};
+
+         options.option = function (data){
+            this.title = m.prop(data.title);
+         }
+
+         options.options = Array;
+
+         options.vm = (function(){
+            var vm = {}
+            vm.init = function(){
+               vm.list = new options.options();
+
+               vm.title = m.prop("");
+
+               vm.add = function(){
+                  if(vm.title()){
+                     vm.list.push(new options.title({title: vm.title()}));
+                     vm.title("");
+                  }
+               }
+            }
+            return vm;
+         }())
+
+         options.controller = function() {
+            options.vm.init()
+         };
+
+         options.view = function() {
+            return [
+               m("input", {onchange: m.withAttr("value", options.vm.title), value: options.vm.title()}),
+               m("p", "boo"),
+               m("button", {onclick: options.vm.add}, "Add"),
+               m("h3", "options list:"),
+               m("table", [
+                  options.vm.list.map(function(newOption, index) {
+                     return m("tr", [
+                        m("td", newOption.title()),
+                     ])
+                  })
+               ])
+            ]
+         };
+
+          m.mount(document.body, {controller: options.controller, view: options.view});
+      </script>
+   </body>
+</html>
