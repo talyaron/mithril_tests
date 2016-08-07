@@ -38,7 +38,7 @@
                //adds a todo to the list, and clears the description field for user convenience
                vm.add = function() {
                   if (vm.description()) {
-                     vm.list.push(new options.title({title: vm.title()}));
+                     vm.list.push(new todo.Todo({description: vm.description()}));
                      vm.description("");
                   }
                };

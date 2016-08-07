@@ -6,24 +6,24 @@
    </head>
    <body>
       <script>
-         var options = {};
+         var Options = {};
 
-         options.option = function (data){
+         Options.option = function (data){
             this.title = m.prop(data.title);
          }
 
-         options.options = Array;
+         Options.options = Array;
 
-         options.vm = (function(){
+         Options.vm = (function(){
             var vm = {}
             vm.init = function(){
-               vm.list = new options.options();
+               vm.list = new Options.options();
 
                vm.title = m.prop("");
 
                vm.add = function(){
                   if(vm.title()){
-                     vm.list.push(new options.title({title: vm.title()}));
+                     vm.list.push(new Options.option({title: vm.title()}));
                      vm.title("");
                   }
                }
@@ -31,18 +31,18 @@
             return vm;
          }())
 
-         options.controller = function() {
-            options.vm.init()
+         Options.controller = function() {
+            Options.vm.init()
          };
 
-         options.view = function() {
+         Options.view = function() {
             return [
-               m("input", {onchange: m.withAttr("value", options.vm.title), value: options.vm.title()}),
+               m("input", {onchange: m.withAttr("value", Options.vm.title), value: Options.vm.title()}),
                m("p", "boo"),
-               m("button", {onclick: options.vm.add}, "Add"),
+               m("button", {onclick: Options.vm.add}, "Add"),
                m("h3", "options list:"),
                m("table", [
-                  options.vm.list.map(function(newOption, index) {
+                  Options.vm.list.map(function(newOption, index) {
                      return m("tr", [
                         m("td", newOption.title()),
                      ])
@@ -51,7 +51,7 @@
             ]
          };
 
-          m.mount(document.body, {controller: options.controller, view: options.view});
+          m.mount(document.body, {controller: Options.controller, view: Options.view});
       </script>
    </body>
 </html>
